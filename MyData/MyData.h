@@ -1,4 +1,5 @@
 // MyData.h : main header file for the MyData DLL
+// 
 //
 
 #pragma once
@@ -14,6 +15,7 @@
 #endif
 
 #include "resource.h"		// main symbols
+//#include "Except1.h"
 
 
 // CMyDataApp
@@ -47,13 +49,20 @@ public:
 	int numb;
 	COLORREF color;
 
+	//MY_POINT() : x(0), y(0), name(NULL), numb(0), color(RGB(200, 200, 200)) {};
 
-	
+	// Constructor definition
+	//MY_POINT(double xx, double yy, char* _name = nullptr, int _numb = 0, COLORREF _color = RGB(200, 200, 200));
+		//: x(xx), y(yy), name(_name), numb(_numb), color(_color) {
+	//}
 
-	// RGB(200, 200, 200)
-	// _color = 0x00000000
+
+	// copy constructor
+	MY_POINT(MY_POINT& other);
+
 	MY_POINT() { x = 0; y = 0; name = nullptr, numb = 0; color = RGB(200, 200, 200); }
 	MY_POINT(double xx, double yy, char* _name = nullptr, int _numb = 0, COLORREF _color = RGB(200, 200, 200)) { x = xx; y = yy; name = _name; numb = _numb; color = _color; }
+
 	~MY_POINT()
 	{
 		if (name) {
@@ -61,14 +70,38 @@ public:
 			name = nullptr;
 		}
 	}
-	//~MY_POINT() { if (name) { delete[] name; name = nullptr; } }
-	void set(double xx, double yy, char* _name = nullptr, int _numb = 0, COLORREF _color = RGB(200, 200, 200)) { x = xx; y = yy; name = _name; numb = _numb; color = _color; }
+
+public:
+
+	// setter for name
+	void setName(const char* name_);
+
+	// getter for name 
+	char* getName() const { return name; };
+
+	// setter for numb
+	//void setNumb(int numb_) { numb = numb_; };
+
+	// getter for numb
+	//int getNumb() const { return numb; };
+
+	// setter for color
+	//void setColor(COLORREF color_) { color = color_; };
+
+	// getter for color
+	//COLORREF getColor() const { return color; };
+
+	//void disp() const;
+
+
 	MY_POINT get() { return *this; }
 
 	// is capable to compare MY_POINT to do std::string
-	bool operator==(const CString& key) const {
+	bool operator == (const CString& key) const {
 		return CString(name) == key;
 	}
+
+	MY_POINT& operator = (const MY_POINT& other);
 };
 
 class MYDATA_API MY_DATA : public MY_POINT

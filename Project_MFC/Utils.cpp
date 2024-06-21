@@ -22,12 +22,25 @@ COLORREF Utils::CStringToColorRef(const CString& cStr) {
 }
 
 
+//char* Utils::CStringToCharArray(const CString& str)
+//{
+//    // Allocate a buffer to hold the string
+//    char* buffer = new char[str.GetLength() + 1];
+//    // Copy the CString contents to the buffer
+//    strcpy_s(buffer,sizeof(buffer), str);
+//    return buffer;
+//
+//}
+
 char* Utils::CStringToCharArray(const CString& str)
 {
-    // Allocate a buffer to hold the string
-    char* buffer = new char[str.GetLength() + 1];
+    // Allocate a buffer to hold the string, including space for the null terminator
+    int length = str.GetLength();
+    char* buffer = new char[length + 1];
+
     // Copy the CString contents to the buffer
-    strcpy_s(buffer,sizeof(buffer), str);
+    strcpy_s(buffer, length + 1, CT2A(str));
+
     return buffer;
 }
 

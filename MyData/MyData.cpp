@@ -1,5 +1,6 @@
 // MyData.cpp : Defines the initialization routines for the DLL.
 //
+//
 
 #include "pch.h"
 #include "framework.h"
@@ -9,6 +10,7 @@
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
+#pragma warning(disable:4996)
 
 //
 //TODO: If this DLL is dynamically linked against the MFC DLLs,
@@ -69,9 +71,6 @@ MY_POINT* MY_DATA::allocTab(MY_POINT* ptab, int n)
 {
     try
     {
-
-
-
         if (!ptab)
         {
             ptab = new MY_POINT[n];
@@ -151,4 +150,36 @@ void MY_DATA::GetMaxMinCoords(double& max_x, double& min_x, double& max_y, doubl
     }
 }
 
+void MY_POINT::setName(const char* name_) {
+    if (name_ == NULL) {
+        return;
+    }
 
+    if (name != NULL) {
+        delete[] name;
+        name = NULL;
+    }
+
+    size_t len = std::strlen(name_);
+    name = new char[len + 1]; // add +1 to accomodate for \0
+    std::strcpy(name, name_);
+}
+
+// copy contructor
+MY_POINT::MY_POINT(MY_POINT& other) {
+    name = NULL;
+    x = other.x;
+    y = other.y;
+    numb = other.numb;
+    color = other.color;
+    setName(other.name);
+}
+
+MY_POINT& MY_POINT::operator = (const MY_POINT& other) {
+    x = other.x;
+    y = other.y;
+    color = other.color;
+    numb = other.numb;
+    setName(other.name);
+    return *this;
+}

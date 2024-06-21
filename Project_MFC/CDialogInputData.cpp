@@ -126,7 +126,7 @@ BOOL CDialogInputData::OnInitDialog()
 void CDialogInputData::ModifyData()
 {
 	try {
-		char st[512];
+		//char st[512];
 		BOOL ret(0);
 		MY_POINT tmp;
 
