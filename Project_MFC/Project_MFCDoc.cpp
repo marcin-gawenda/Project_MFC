@@ -83,8 +83,10 @@ void CProjectMFCDoc::Serialize(CArchive& ar)
 
 			for (int i = 0; i < no_it; ++i)
 			{
-				tmp = (*pDat)[i].get();
-				ar << tmp.x << tmp.y<<tmp.color<<tmp.name;
+				tmp = (*pDat)[i].get();				
+				CString c_name;
+				c_name.Format(tmp.getName());
+				ar << tmp.numb << tmp.x << tmp.y << tmp.color << c_name;
 			}
 		}
 
@@ -113,7 +115,7 @@ void CProjectMFCDoc::Serialize(CArchive& ar)
 			MY_POINT tmp;
 			for (int i = 0; i < no_it; ++i)
 			{
-				ar >> tmp.x >> tmp.y >> tmp.color;
+				ar >> tmp.numb >> tmp.x >> tmp.y >> tmp.color;
 				CString name;
 				ar >> name;
 				tmp.name = new char[name.GetLength() + 1]; // allocate memory
