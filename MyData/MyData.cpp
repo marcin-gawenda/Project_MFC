@@ -150,8 +150,17 @@ void MY_DATA::GetMaxMinCoords(double& max_x, double& min_x, double& max_y, doubl
     }
 }
 
-void MY_POINT::setName(const char* name_) {
-    if (name_ == NULL) {
+MY_POINT::MY_POINT(double xx, double yy, const char* _name, int _numb, COLORREF _color) {
+    name = NULL;
+    x = xx;
+    y = yy;
+    numb = _numb;
+    color = _color;
+    setName(_name);
+}
+
+void MY_POINT::setName(const char* _name) {
+    if (_name == NULL) {
         return;
     }
 
@@ -160,9 +169,9 @@ void MY_POINT::setName(const char* name_) {
         name = NULL;
     }
 
-    size_t len = std::strlen(name_);
+    size_t len = std::strlen(_name);
     name = new char[len + 1]; // add +1 to accomodate for \0
-    std::strcpy(name, name_);
+    std::strcpy(name, _name);
 }
 
 // copy contructor

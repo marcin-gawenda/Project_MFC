@@ -49,19 +49,14 @@ public:
 	int numb;
 	COLORREF color;
 
-	//MY_POINT() : x(0), y(0), name(NULL), numb(0), color(RGB(200, 200, 200)) {};
+	// default constructor
+	MY_POINT() : x(0), y(0), name(NULL), numb(0), color(RGB(200, 200, 200)) {};
 
 	// Constructor definition
-	//MY_POINT(double xx, double yy, char* _name = nullptr, int _numb = 0, COLORREF _color = RGB(200, 200, 200));
-		//: x(xx), y(yy), name(_name), numb(_numb), color(_color) {
-	//}
-
+	MY_POINT(double xx, double yy, const char* _name = nullptr, int _numb = 0, COLORREF _color = RGB(200, 200, 200));
 
 	// copy constructor
 	MY_POINT(MY_POINT& other);
-
-	MY_POINT() { x = 0; y = 0; name = nullptr, numb = 0; color = RGB(200, 200, 200); }
-	MY_POINT(double xx, double yy, char* _name = nullptr, int _numb = 0, COLORREF _color = RGB(200, 200, 200)) { x = xx; y = yy; name = _name; numb = _numb; color = _color; }
 
 	~MY_POINT()
 	{
@@ -74,26 +69,24 @@ public:
 public:
 
 	// setter for name
-	void setName(const char* name_);
+	void setName(const char* _name);
 
 	// getter for name 
 	char* getName() const { return name; };
 
 	// setter for numb
-	//void setNumb(int numb_) { numb = numb_; };
+	void setNumb(int _numb) { numb = _numb; };
 
 	// getter for numb
-	//int getNumb() const { return numb; };
+	int getNumb() const { return numb; };
 
 	// setter for color
-	//void setColor(COLORREF color_) { color = color_; };
+	void setColor(COLORREF _color) { color = _color; };
 
 	// getter for color
-	//COLORREF getColor() const { return color; };
+	COLORREF getColor() const { return color; };
 
-	//void disp() const;
-
-
+	
 	MY_POINT get() { return *this; }
 
 	// is capable to compare MY_POINT to do std::string
